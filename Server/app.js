@@ -25,6 +25,48 @@ var dbConn = mysql.createConnection({
 // connect to database
 dbConn.connect(); 
 
+
+// powers routes//
+//view all powers
+app.get("/powers", function(req,res){
+
+    dbConn.query("SELECT * from powers", function(err, results){
+        if(err){
+            console.log("Cant fetch powers");
+        }
+        else {
+            res.send(results);
+        }
+    });
+});
+ 
+//add a new power
+app.post("/powers", function (req, res) {
+    var power = {
+        name: req.body.name,
+        id : req.body.id
+    };
+    if (!power) {
+        return res.status(400).send({ error: true, message: 'please provide power' });
+    }
+    dbConn.query(`INSERT INTO powers (id,name) values('${power.id}','${power.name}')`, function (error, results) {
+        if (error) { throw err }
+        else {
+            return res.send({data : results , message: "Added new power successfully" });
+        }
+    })
+})
+
+
+
+
+
+
+
+
+
+// heroes routes
+
 app.get('/heroes', (req, res) => {
     dbConn.query("SELECT * from heroes", function (err, results) {
         if (err) {

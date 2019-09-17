@@ -1,0 +1,17 @@
+<h2> Power of Heroes </h2>
+
+    <div>
+        <label>Power Name:
+          <input #powerName type="text"/>
+        </label>
+        <!-- (click) passes input value to add() and then clears the input -->
+        <button (click)="addPower(powerName.value); powerName.value=''">
+          add
+        </button>
+      </div>
+
+<!--For displaying the list of Powers-->
+<li *ngFor= "let power of powers">
+  <span class="badge">ID : {{power.id}},</span> Power: {{power.name}}
+   
+</li>
