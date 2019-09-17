@@ -55,7 +55,18 @@ app.post("/powers", function (req, res) {
             return res.send({data : results , message: "Added new power successfully" });
         }
     })
-})
+});
+
+app.delete('/power/:id', function (req, res) {
+    var id = req.params.id;
+    if (!id) {
+        return res.status(400).send({ error: true, message: 'Please provide power_id' });
+    }
+    dbConn.query('DELETE FROM powers WHERE id = ?', [id], function (error, results, fields) {
+        if (error) throw error;
+        return res.send({ error: false, data: results, message: 'Power has been deleted successfully.' });
+    });
+});
 
 
 

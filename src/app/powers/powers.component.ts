@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PowersService } from "../powers.service";
 import { Power } from '../power';
 import { from } from 'rxjs';
+import { Hero } from '../hero';
 
 @Component({
   selector: 'app-powers',
@@ -31,5 +32,10 @@ export class PowersComponent implements OnInit {
     this.getPowers();
   });
  }
+
+ delPower(power: Power): void {
+  this.powers = this.powers.filter(h => h !== power);
+  this.powersService.deleteHero(power).subscribe();
+}
 
 };

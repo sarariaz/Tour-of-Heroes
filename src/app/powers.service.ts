@@ -35,8 +35,19 @@ addPower (power: Power): Observable<Power> {
    // tap((newHero: Hero) => this.log(`added hero w/ id=${newHero.id}`)),
    // catchError(this.handleError<Hero>('addHero'))
  // );
-                                            }
-
+     }
+  
+    /** DELETE: delete the hero from the server */
+    deleteHero (power: Power | number): Observable<Power> {
+      const id = typeof power === 'number' ? power : power.id;
+      const url = `http://localhost:3000/power/${id}`;
+  
+      return this.http.delete<Power>(url, this.httpOptions)
+     // .pipe(
+      //  tap(_ => this.log(`deleted hero id=${id}`)),
+      //  catchError(this.handleError<Hero>('deleteHero'))
+     // );
+    }
 
 
 
