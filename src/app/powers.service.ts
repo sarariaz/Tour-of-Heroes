@@ -22,10 +22,10 @@ export class PowersService {
     /** GET powers from the server */
     getPowers (): Observable<Power[]> {
       return this.http.get<Power[]>(this.powersUrl)
-       // .pipe(
-        //  tap(_ => this.log('fetched heroes')),
-       //   catchError(this.handleError<Power[]>('getHeroes', []))
-      //  );
+      //  .pipe(
+       //  tap(_ => this.log('fetched Powers')),
+      //  catchError(this.handleError<Power[]>('getPowers', []))
+     // );
     }  
 
 /** POST: add a new POWER to the server */
@@ -48,6 +48,8 @@ addPower (power: Power): Observable<Power> {
       //  catchError(this.handleError<Hero>('deleteHero'))
      // );
     }
+
+   
 
 
 

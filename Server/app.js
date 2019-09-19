@@ -20,7 +20,8 @@ var dbConn = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'db'
+    database: 'db',
+ //   socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock'
 });
 // connect to database
 dbConn.connect(); 
@@ -57,6 +58,8 @@ app.post("/powers", function (req, res) {
     })
 });
 
+
+
 app.delete('/power/:id', function (req, res) {
     var id = req.params.id;
     if (!id) {
@@ -67,6 +70,7 @@ app.delete('/power/:id', function (req, res) {
         return res.send({ error: false, data: results, message: 'Power has been deleted successfully.' });
     });
 });
+
 
 
 
@@ -103,12 +107,13 @@ app.get("/heroes/:id", function (req, res) {
 app.post("/heroes", function (req, res) {
     var hero = {
         name: req.body.name,
-        id : req.body.id
+        id : req.body.id,
+        powers: req.body.powers
     };
     if (!hero) {
         return res.status(400).send({ error: true, message: 'please provide user' });
     }
-    dbConn.query(`INSERT INTO heroes (id,name) values('${hero.id}','${hero.name}')`, function (error, results) {
+    dbConn.query(`INSERT INTO heroes (id,name,powers) values('${hero.id}','${hero.name}', '${hero.powers}')`, function (error, results) {
         if (error) { throw err }
         else {
             return res.send({data : results , message: "Added new user successfully" });

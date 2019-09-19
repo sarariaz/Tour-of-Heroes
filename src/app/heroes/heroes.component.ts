@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
-
+import { PowersService } from '../powers.service';
+import { Power } from '../power';
+import { from } from 'rxjs';
 @Component({
   selector: 'app-heroes',
   templateUrl: './heroes.component.html',
@@ -10,11 +12,15 @@ import { HeroService } from '../hero.service';
 })
 export class HeroesComponent implements OnInit {
   heroes: Hero[];
+  powers: Power[];
 
-  constructor(private heroService: HeroService) { }
+  constructor(private heroService: HeroService,
+              private powerService: PowersService
+    ) { }
 
   ngOnInit() {
     this.getHeroes();
+    this.getPowers();
   }
 
   getHeroes(): void {
@@ -23,11 +29,18 @@ export class HeroesComponent implements OnInit {
       this.heroes = heroes; });
     
   }
+ // get powers from power service 
+  getPowers(): void {
+    this.powerService.getPowers()
+    .subscribe(powers => {
+      this.powers = powers;
+    });
+  }
 
-  add(name: string): void {
+  add(name: string, powers: string): void {
     name = name.trim();
     if (!name) { return; }
-    this.heroService.addHero({ name } as Hero)
+    this.heroService.addHero({ name, powers } as Hero)
       .subscribe(hero => {
         this.heroes.push(hero);
         this.getHeroes();

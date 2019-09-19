@@ -38,4 +38,5 @@ export class PowersComponent implements OnInit {
   this.powersService.deleteHero(power).subscribe();
 }
 
+
 };
