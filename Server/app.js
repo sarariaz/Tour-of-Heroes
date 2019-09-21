@@ -73,13 +73,6 @@ app.delete('/power/:id', function (req, res) {
 
 
 
-
-
-
-
-
-
-
 // heroes routes
 
 app.get('/heroes', (req, res) => {
@@ -108,15 +101,16 @@ app.post("/heroes", function (req, res) {
     var hero = {
         name: req.body.name,
         id : req.body.id,
-        powers: req.body.powers
+        city: req.body.city
+    
     };
     if (!hero) {
         return res.status(400).send({ error: true, message: 'please provide user' });
     }
-    dbConn.query(`INSERT INTO heroes (id,name,powers) values('${hero.id}','${hero.name}', '${hero.powers}')`, function (error, results) {
+    dbConn.query(`INSERT INTO heroes (id,name,city) values('${hero.id}','${hero.name}' ,'${hero.city}')`, function (error, results) {
         if (error) { throw err }
         else {
-            return res.send({data : results , message: "Added new user successfully" });
+            return res.send({data : results , message: "Added new Hero successfully" });
         }
     })
 })
@@ -156,6 +150,55 @@ app.get("heroes/?name=:term", function (req, res) {
         return res.send(result[0]);
     });
 });
+
+//========================================================================================
+// HERO POWER ROUTES
+//========================================================================================
+
+
+// Show the heropower table and the powers of particular hero
+app.get("/heropowers/:id", function (req, res) {
+    let hero_id = req.params.id;
+    dbConn.query('SELECT hp.hp_id , h.name as hname , p.name FROM hero_power hp, heroes h, powers p WHERE hp.h_id = h.id AND hp.p_id = p.id AND h.id = ?', [hero_id] , function (err, result) {
+        if (err) throw err;
+        return res.send(result);
+    });
+});
+
+//Add new powers to the Hero in HeroPower Table
+app.post("/heropowers/:heroid/:powerid", function(req,res){
+    var heroPower = {
+        heroid  :req.params.heroid,
+        powerid : req.params.powerid
+    }
+    if(!heroPower){
+        res.send("There is incomplete information provided");
+
+    }
+    dbConn.query(`INSERT INTO hero_power (h_id, p_id) VALUES ('${heroPower.heroid}','${heroPower.powerid}')`, function(err, result){
+        if(err){
+            throw err;
+        }
+        return res.send({data : result , message : "Added new power to hero in heropower table!"});
+    });
+});
+
+// To delete the Power of a Hero
+app.delete('/heropowers/:id' , function(req,res){
+    var id = req.params.id
+    if (!id) {
+        return res.send('please provide power');
+    }
+    dbConn.query("DELETE from hero_power where hp_id = ?" , [id] , function(error , result ) {
+        if(error) throw err;
+        return res.send({data : result , message : "Deleted power to hero"});
+    });
+})
+
+
+
+
+
 
 
  // set port

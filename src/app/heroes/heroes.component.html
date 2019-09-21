@@ -23,19 +23,24 @@
 
   </label>
 
+  <label>Hero City:
+      <input #heroCity >
+  
+    </label>
+
   <!-- (click) passes input value to add() and then clears the input -->
-  <button (click)="add(heroName.value, heroPower.value); heroName.value=''">
+  <button (click)="add(heroName.value, heroCity.value); heroName.value=''">
     add
   </button>
 </div>
 
 
   <!-- For displaying the list of Powers from Powers Service-->
-  <ul class="powers">
+   <!---- <ul class="powers">
     <h3> Add any of these to the Hero</h3>
       <li *ngFor="let power of powers">
         
           <span class="badge">{{power.id}}</span> {{power.name}} 
           
       </li>
-    </ul>
+    </ul> <!-->

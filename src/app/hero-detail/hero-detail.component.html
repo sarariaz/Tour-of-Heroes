@@ -1,14 +1,46 @@
 <div *ngIf="hero">
   <h2>{{hero.name | uppercase}} Details</h2>
   <div><span>id: </span>{{hero.id}}</div>
-  <div><span>Power: </span>{{ hero.powers }}</div>
+  <div><span>City: </span>{{hero.city}}</div>
+
   <div>
     <label>name:
       <input [(ngModel)]="hero.name" placeholder="name"/>
     </label>
   </div>
-  
-  
+
+
+  <div class="dropdown">
+      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Dropdown button
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" *ngFor="let power of powers">
+          <span (click)="addPowerToHero(power)">{{power.name}}</span>
+        </a>
+      </div>
+    </div>
+    <!--  For displaying the Powers of a particular hero-->
+    <ul class="heroes">
+      <h2>Powers:</h2>
+      <li *ngFor="let heroPower of heroPowers">
+          <a>
+              {{heroPower.name}} <!--this .name is coming from query (p.name)-->
+          </a>
+          <button  (click)="deletePowerFromHeroPower(heroPower)">x</button>
+      </li>
+    </ul>
+
+
   <button (click)="goBack()">go back</button>
   <button (click)="save()">save</button>
-</div>
+ <ul>
+  <!-- For displaying the list of Powers from Powers Service-->
+  <ul class="powers">
+      <h3> Add any of these to the Hero</h3>
+        <li *ngFor="let power of powers" (click)="addPower(power)">
+          
+            <span class="badge" >{{power.id}}</span> {{power.name}} 
+            
+        </li>
+      </ul>

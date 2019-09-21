@@ -22,19 +22,13 @@ export class PowersService {
     /** GET powers from the server */
     getPowers (): Observable<Power[]> {
       return this.http.get<Power[]>(this.powersUrl)
-      //  .pipe(
-       //  tap(_ => this.log('fetched Powers')),
-      //  catchError(this.handleError<Power[]>('getPowers', []))
-     // );
+      
     }  
 
 /** POST: add a new POWER to the server */
 addPower (power: Power): Observable<Power> {
   return this.http.post<Power>(this.powersUrl, power, this.httpOptions)
-  //.pipe(
-   // tap((newHero: Hero) => this.log(`added hero w/ id=${newHero.id}`)),
-   // catchError(this.handleError<Hero>('addHero'))
- // );
+  
      }
   
     /** DELETE: delete the hero from the server */
@@ -43,10 +37,25 @@ addPower (power: Power): Observable<Power> {
       const url = `http://localhost:3000/power/${id}`;
   
       return this.http.delete<Power>(url, this.httpOptions)
-     // .pipe(
-      //  tap(_ => this.log(`deleted hero id=${id}`)),
-      //  catchError(this.handleError<Hero>('deleteHero'))
-     // );
+    
+    }
+// HEROPOWER TABLE 
+    getHeroPowers(id: number): Observable<Power[]> {
+      const url = `http://localhost:3000/heropowers/${id}`;
+      return this.http.get<Power[]>(url);
+    }
+
+    addPowerToHero(data : any): Observable<any> {
+      let id = data.heroId;
+      let power_id = data.pId;
+      console.log(data)
+      return this.http.post<any>(`http://localhost:3000/heropowers/${id}/${power_id}` , this.httpOptions)
+    }
+  
+  
+    deletePowerFromHeroPower(id : number): Observable<any> {
+      return this.http.delete<any>(`http://localhost:3000/heropowers/${id}`, this.httpOptions)
+     
     }
 
    

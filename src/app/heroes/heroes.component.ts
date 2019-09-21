@@ -20,7 +20,7 @@ export class HeroesComponent implements OnInit {
 
   ngOnInit() {
     this.getHeroes();
-    this.getPowers();
+  //  this.getPowers();
   }
 
   getHeroes(): void {
@@ -29,18 +29,18 @@ export class HeroesComponent implements OnInit {
       this.heroes = heroes; });
     
   }
- // get powers from power service 
-  getPowers(): void {
-    this.powerService.getPowers()
-    .subscribe(powers => {
-      this.powers = powers;
-    });
-  }
+  //get powers from power service 
+  //getPowers(): void {
+    //this.powerService.getPowers()
+    //.subscribe(powers => {
+      //this.powers = powers;
+   // });
+  //}
 
-  add(name: string, powers: string): void {
+  add(name: string, city: string): void {
     name = name.trim();
     if (!name) { return; }
-    this.heroService.addHero({ name, powers } as Hero)
+    this.heroService.addHero({ name, city } as Hero)
       .subscribe(hero => {
         this.heroes.push(hero);
         this.getHeroes();
