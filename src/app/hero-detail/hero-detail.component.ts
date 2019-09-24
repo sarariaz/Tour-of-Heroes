@@ -50,6 +50,7 @@ export class HeroDetailComponent implements OnInit {
     this.powerService.getPowers()
       .subscribe(powers => this.powers = powers);
   }
+  //=========================================================================
 // HERO POWER
   getHeroPowers() : void {
     const id = +this.route.snapshot.paramMap.get('id');
@@ -65,27 +66,36 @@ export class HeroDetailComponent implements OnInit {
     this.heroService.updateHero(this.hero)
       .subscribe(() => this.goBack());
   }
-
+// for adding powers to hero
   addPower(power){
+ //   console.log(this.heroPowers);
+  // this.powers = this.powers.filter(h => h !== power)
 const data = {
 
        pId: power.id,
        heroId :this.hero.id
    }
-    console.log(data);
+   var haha = power.name; //aany wali power ka naam
+   for(let i=0;i<this.heroPowers.length;i++ ){
 
-    if (!power) { 
-      console.log("no power given")
-      return; }
-    this.powerService.addPowerToHero(data)
+     if(this.heroPowers[i].name == haha)
+     {
+       var boolean = true;
+       console.log("repeated power");
+       break;
+     }
+    }
+    if(boolean !== true){
+      this.powerService.addPowerToHero(data)
       .subscribe(power => {
         console.log("power is" + power);
         this.getPowers();
         this.getHeroPowers();
-     
+      
       });
-    
-  }
+    }
+     }
+ 
 
   deletePowerFromHeroPower(heroPower : any)
   {

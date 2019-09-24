@@ -11,6 +11,7 @@ import { CostumesService } from '../costumes.service';
 export class CostumesComponent implements OnInit {
   
    costumes : Costume[];
+
   constructor(private costumesService : CostumesService) { }
 
   ngOnInit() {
@@ -37,5 +38,6 @@ export class CostumesComponent implements OnInit {
     this.costumes = this.costumes.filter(h => h !== costume);
     this.costumesService.delCostume(costume).subscribe();
   }
+
   
 }
