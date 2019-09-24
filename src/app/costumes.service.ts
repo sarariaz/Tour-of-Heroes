@@ -47,8 +47,7 @@ export class CostumesService {
   }
   // delete a herocostume
   delHeroCostume( id:number): Observable<Costume> {
-  //  const id = typeof costume === 'number' ? costume : costume.id;
-    return this.http.put<Costume>(`http://localhost:3000/herocostume/${id}`, this.httpOptions);
+   return this.http.put<Costume>(`http://localhost:3000/herocostume/${id}`, this.httpOptions);
 
 }
 

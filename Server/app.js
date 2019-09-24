@@ -269,6 +269,8 @@ app.get("/herocostume/:id", function(req,res){
 
 
 //Delete COSTUME FROM HERO
+
+//we are using PUT as HTTP VERB because we want to edit/update only ONE SINGLE column, NOT the whole row.
 app.put('/herocostume/:id' , function(req,res){
     var hero_id = req.params.id
    
@@ -276,7 +278,17 @@ app.put('/herocostume/:id' , function(req,res){
         if(error) throw error;
         return res.send(result);
     });
-})
+});
+
+// adding new costume to hero
+app.put("/herocostume/:heroid/:costumeid", function (req, res) {
+    let hero_id = req.params.heroid;
+    let costume_id = req.params.costumeid;
+    dbConn.query("UPDATE heroes SET costume_id = ? WHERE id = ?" , [costume_id,hero_id] , function (err, result) {
+        if (err) throw err;
+    return res.send(result);
+});
+});
  
 
 
