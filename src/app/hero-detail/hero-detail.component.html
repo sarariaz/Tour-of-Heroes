@@ -32,6 +32,17 @@
       </li>
     </ul>
 
+       <!--  For displaying the Costume of a particular hero-->
+       <ul class="heroes">
+        <h2>Costume:</h2>
+        <li *ngFor="let heroCostumee of heroCostume">
+            <a>
+                {{heroCostumee.name}} <!--this .name is coming from query (p.name)-->
+            </a>
+            <button  (click)="delHeroCostume(heroCostumee)">x</button>
+        </li>
+      </ul>
+
 
 
 

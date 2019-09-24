@@ -40,7 +40,9 @@ export class CostumesService {
     return this.http.delete<Costume>(`http://localhost:3000/costumes/${id}`, this.httpOptions);
    
   }
-
-
+ // For HeroCostume Route
+  getHeroCostume(id: number): Observable<Costume[]> {
+    const url = `http://localhost:3000/herocostume/${id}`;
+    return this.http.get<Costume[]>(url);}
 }
 

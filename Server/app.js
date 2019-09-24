@@ -253,6 +253,18 @@ app.delete("/costumes/:id",function(req,res){
     });
 });
 
+//===============================================================
+// ROUTES FOR , GETTING, ADDING AND DELETING THE COSTUME OF HERO
+
+app.get("/herocostume/:id", function(req,res){
+    var id = req.params.id;
+    dbConn.query(`SELECT h.costume_id , c.name  FROM costumes c, heroes h WHERE h.costume_id = c.id AND h.id = ?`, [id], function(err, results){
+        if(err){
+            throw err;
+        }
+        res.send(results);
+    })
+})
 
 
 
