@@ -263,8 +263,22 @@ app.get("/herocostume/:id", function(req,res){
             throw err;
         }
         res.send(results);
-    })
+    });
+
+});
+
+
+//Delete COSTUME FROM HERO
+app.put('/herocostume/:id' , function(req,res){
+    var hero_id = req.params.id
+   
+    dbConn.query("UPDATE heroes SET costume_id = NULL WHERE id = ?" , [hero_id] , function(error , result ) {
+        if(error) throw error;
+        return res.send(result);
+    });
 })
+ 
+
 
 
 

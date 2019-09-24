@@ -59,10 +59,10 @@
         </li>
       </ul>
 
-       <!-- For displaying the list of Costumes from Powers Service-->
+       <!-- For displaying the list of Costumes from Costume Service-->
   <ul class="powers">
     <h3> Costumes</h3>
-      <li *ngFor="let costume of costumes">
+      <li *ngFor="let costume of costumes" (click)="addCostumeToHero(costume)">
         
           <span class="badge" >{{costume.id}}</span> {{costume.name}} 
           

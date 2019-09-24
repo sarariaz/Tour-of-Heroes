@@ -43,6 +43,23 @@ export class CostumesService {
  // For HeroCostume Route
   getHeroCostume(id: number): Observable<Costume[]> {
     const url = `http://localhost:3000/herocostume/${id}`;
-    return this.http.get<Costume[]>(url);}
+    return this.http.get<Costume[]>(url);
+  }
+  // delete a herocostume
+  delHeroCostume( id:number): Observable<Costume> {
+  //  const id = typeof costume === 'number' ? costume : costume.id;
+    return this.http.put<Costume>(`http://localhost:3000/herocostume/${id}`, this.httpOptions);
+
+}
+
+//add costume to particular hero
+addCostumeToHero(data){
+  let hid = data.heroId;
+  let cid = data.cId;
+  return this.http.put<any>(`http://localhost:3000/herocostume/${hid}/${cid}`, this.httpOptions)
+}
+
+
+
 }
 

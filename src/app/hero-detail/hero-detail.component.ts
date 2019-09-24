@@ -35,6 +35,7 @@ export class HeroDetailComponent implements OnInit {
     this.getHero();
     this.getPowers();
     this.getHeroPowers();
+    this.getCostumes();
     this.getHeroCostume();
     
   }
@@ -99,15 +100,48 @@ const data = {
     });
 
   }
+  //==========================================================================
+// To get all costumes
+getCostumes(): void {
+  this.costumesService.getCostumes()
+    .subscribe(costumes => this.costumes = costumes);
+}
+
 // To get Costume of a Particular Hero
   getHeroCostume() : void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.costumesService.getHeroCostume(id)
       .subscribe(heroCostume => this.heroCostume = heroCostume);
   }
+  delHeroCostume(): void
+  {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.costumesService.delHeroCostume(id)
+      .subscribe(() => this.getHeroCostume());
+  }
+  
+  addCostumeToHero(costume){
+    const data = {
+    
+           cId: costume.id,
+           heroId :this.hero.id
+       }
+        console.log(data);
+    
+        if (!costume) { 
+          console.log("no costume given")
+          return; }
+        this.costumesService.addCostumeToHero(data)
+          .subscribe(costume => {
+          //  console.log("costume is" + power);
+            this.getCostumes();
+            this.getHeroCostume();
+         
+          });
+        
+      }
+  
 
-  
-  
 
 
 
