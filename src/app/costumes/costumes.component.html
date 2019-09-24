@@ -1,0 +1,11 @@
+<!--For displaying the list of Costumes-->
+<li *ngFor= "let costume of costumes">
+    <span class="badge">ID : {{costume.id}},</span> Costume: {{costume.name}}
+    <button class="delete" title="delete costume"
+    (click)="delCostume(costume)">x</button>
+   
+  
+  </li>
+
+  <input type="text" #newCostume>
+  <button type="submit" (click)="addNewCostume(newCostume.value)">Add</button>

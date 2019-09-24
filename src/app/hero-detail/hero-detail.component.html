@@ -2,7 +2,8 @@
   <h2>{{hero.name | uppercase}} Details</h2>
   <div><span>id: </span>{{hero.id}}</div>
   <div><span>City: </span>{{hero.city}}</div>
-
+  <div>Costume ID: {{hero.costume_id}}</div>
+  
   <div>
     <label>name:
       <input [(ngModel)]="hero.name" placeholder="name"/>
@@ -32,6 +33,8 @@
     </ul>
 
 
+
+
   <button (click)="goBack()">go back</button>
   <button (click)="save()">save</button>
  <ul>
@@ -44,3 +47,14 @@
             
         </li>
       </ul>
+
+       <!-- For displaying the list of Costumes from Powers Service-->
+  <ul class="powers">
+    <h3> Costumes</h3>
+      <li *ngFor="let costume of costumes">
+        
+          <span class="badge" >{{costume.id}}</span> {{costume.name}} 
+          
+      </li>
+    </ul>
+

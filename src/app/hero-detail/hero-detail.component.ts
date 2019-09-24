@@ -18,6 +18,7 @@ export class HeroDetailComponent implements OnInit {
   @Input() hero: Hero;
   powers: Power[];
   heroPowers : Power[];
+  costumes : Power[];
 
   constructor(
     private route: ActivatedRoute,
@@ -30,6 +31,7 @@ export class HeroDetailComponent implements OnInit {
     this.getHero();
     this.getPowers();
     this.getHeroPowers();
+    
   }
 
   getHero(): void {
@@ -48,27 +50,6 @@ export class HeroDetailComponent implements OnInit {
     this.powerService.getHeroPowers(id)
       .subscribe(heroPowers => this.heroPowers = heroPowers);
   }
-
-
-  addPowerToHero(power: Power): void {
-    console.log("clicked in add power func")
-    const id = +this.route.snapshot.paramMap.get('id');
-    const data = {
-      power_id : power.id,
-      hero_id : id
-    }
-    // console.log("Hero id is " + id);
-    // console.log("Power id is " + power.id)
-    if (!power) { 
-      console.log("no power given")
-      return; }
-    this.powerService.addPowerToHero(data)
-      .subscribe(power => {
-        console.log("power is" + power)
-     
-      });
-  }
-
 
   goBack(): void {
     this.location.back();
@@ -113,4 +94,10 @@ const data = {
     });
 
   }
+
+  
+  
+
+
+
 }

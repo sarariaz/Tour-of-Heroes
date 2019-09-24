@@ -193,7 +193,67 @@ app.delete('/heropowers/:id' , function(req,res){
         if(error) throw err;
         return res.send({data : result , message : "Deleted power to hero"});
     });
-})
+});
+
+// ======================================================================================
+// COSTUMES ROUTES
+// ======================================================================================
+
+// Get all costumes
+
+app.get("/costumes", function(req,res){
+    dbConn.query(`SELECT * from costumes `, function(err, results){
+        if(err){
+            throw err;
+        }
+        res.send(results)
+    });
+});
+
+
+// get a costume from its id
+app.get("/costumes/:id", function(req,res){
+    let costume_id = req.params.id;
+    dbConn.query(`SELECT * FROM costumes WHERE id=?`, costume_id, function(err,result){
+        if(err){
+            throw err;
+        }
+        res.send(result[0]);
+    });
+});
+
+//create a new costume
+app.post("/costumes", function (req, res) {
+    var costume = {
+        name: req.body.name,
+        id : req.body.id
+    
+    };
+    if (!costume) {
+        return res.status(400).send({ error: true, message: 'please provide costume' });
+    }
+    dbConn.query(`INSERT INTO costumes (id,name) values('${costume.id}','${costume.name}')`, function (error, results) {
+        if (error) { throw err }
+        else {
+            return res.send({data : results , message: "Added new costume successfully" });
+        }
+    });
+});
+
+// delete a costume
+app.delete("/costumes/:id",function(req,res){
+    let id = req.params.id;
+    dbConn.query(`DELETE FROM costumes WHERE id=? `, [id] , function(err, result){
+        if(err)
+        {
+            throw err;
+        }
+        res.send(result);
+
+    });
+});
+
+
 
 
 

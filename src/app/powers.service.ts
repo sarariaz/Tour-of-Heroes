@@ -11,6 +11,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 export class PowersService {
 
   private powersUrl = 'http://localhost:3000/powers';  // URL to web api
+  
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -54,9 +55,14 @@ addPower (power: Power): Observable<Power> {
   
   
     deletePowerFromHeroPower(id : number): Observable<any> {
-      return this.http.delete<any>(`http://localhost:3000/heropowers/${id}`, this.httpOptions)
+      return this.http.delete<any>(`http://localhost:3000/heropowers/${id}`, this.httpOptions);
      
     }
+
+    
+ 
+
+
 
    
 
