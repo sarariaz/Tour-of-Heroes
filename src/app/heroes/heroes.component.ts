@@ -42,8 +42,9 @@ export class HeroesComponent implements OnInit {
     if (!name) { return; }
   //  console.log(this.heroes);
     var filterCity = city; //aany wali city hero me aegi
+    filterCity = filterCity.toLowerCase();
     for(var i=0; i<this.heroes.length; i++){
-      if(this.heroes[i].city === filterCity){
+      if(this.heroes[i].city.toLowerCase() === filterCity){ // checking if new city is repeated one
         var flag = true;
         console.log("This city is already taken");
         alert("The city you entered is already taken!");
