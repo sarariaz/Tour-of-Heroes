@@ -40,12 +40,30 @@ export class HeroesComponent implements OnInit {
   add(name: string, city: string): void {
     name = name.trim();
     if (!name) { return; }
-    this.heroService.addHero({ name, city } as Hero)
+  //  console.log(this.heroes);
+    var filterCity = city; //aany wali city hero me aegi
+    for(var i=0; i<this.heroes.length; i++){
+      if(this.heroes[i].city === filterCity){
+        var flag = true;
+        console.log("This city is already taken");
+        alert("The city you entered is already taken!");
+        break;
+      }
+      
+   // console.log(this.heroes[i].city)
+    }
+
+    if(flag !== true){  
+   // console.log(filterCity);
+        this.heroService.addHero({ name, city } as Hero)
       .subscribe(hero => {
         this.heroes.push(hero);
         this.getHeroes();
       });
+    }
+  
   }
+
 
   delete(hero: Hero): void {
     this.heroes = this.heroes.filter(h => h !== hero);

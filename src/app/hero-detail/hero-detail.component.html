@@ -49,7 +49,7 @@
   <button (click)="goBack()">go back</button>
   <button (click)="save()">save</button>
  <ul>
-  <!-- For displaying the list of Powers from Powers Service-->
+  <!-- For displaying the list of All Powers from Powers Service-->
   <ul class="powers">
       <h3> Add any of these to the Hero</h3>
         <li *ngFor="let power of powers" (click)="addPower(power)">
@@ -59,7 +59,7 @@
         </li>
       </ul>
 
-       <!-- For displaying the list of Costumes from Costume Service-->
+       <!-- For displaying the list of All Costumes from Costume Service-->
   <ul class="powers">
     <h3> Costumes</h3>
       <li *ngFor="let costume of costumes" (click)="addCostumeToHero(costume)">
